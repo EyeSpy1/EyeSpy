@@ -13,3 +13,4 @@ const Heading = ({ className, title, text, tag }) => {
 };
 
 export default Heading;
+

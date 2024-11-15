@@ -1,16 +1,17 @@
-import { brainwaveSymbol, check } from "../assets";
+import { eyespy_logo, check } from "../assets";
 import { collabApps, collabContent, collabText } from "../constants";
 import Button from "./Button";
 import Section from "./Section";
+import Heading from "./Heading";
 import { LeftCurve, RightCurve } from "./design/Collaboration";
 
 const Collaboration = () => {
   return (
-    <Section crosses>
+    <Section crosses id = "working">
       <div className="container lg:flex">
         <div className="max-w-[25rem]">
           <h2 className="h2 mb-4 md:mb-8">
-            AI Chat App for seamless collaboration
+          The Technology Powering Eyespy
           </h2>
 
           <ul className="max-w-[22rem] mb-10 md:mb-14">
@@ -40,10 +41,10 @@ const Collaboration = () => {
               <div className="w-[6rem] aspect-square m-auto p-[0.2rem] bg-conic-gradient rounded-full">
                 <div className="flex items-center justify-center w-full h-full bg-n-8 rounded-full">
                   <img
-                    src={brainwaveSymbol}
-                    width={48}
-                    height={48}
-                    alt="brainwave"
+                    src={eyespy_logo}
+                    width={70}
+                    height={80}
+                    alt="eyespy-logo"
                   />
                 </div>
               </div>

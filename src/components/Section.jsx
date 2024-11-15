@@ -1,5 +1,5 @@
 import SectionSvg from "../assets/svg/SectionSvg";
-
+import Heading from "./Heading";
 const Section = ({
   className,
   id,
