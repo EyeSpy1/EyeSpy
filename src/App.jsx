@@ -6,7 +6,7 @@ import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Roadmap from "./components/Roadmap";
 
-import DrowsinessDetection from './components/DrowsinessDetection';
+import DrowsinessControl from './components/DrowsinessControl';
 
 const App = () => {
   return (
@@ -17,7 +17,7 @@ const App = () => {
         <Benefits />
         <Collaboration />
         <Roadmap />
-        <DrowsinessDetection/>
+        <DrowsinessControl/>
         <Footer />
       </div>
 
