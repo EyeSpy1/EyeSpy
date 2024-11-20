@@ -31,7 +31,7 @@ const Header = () => {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full z-50  border-b border-n-6 lg:bg-n-8/90 lg:backdrop-blur-sm ${
+      className={`fixed top-0 left-0 w-full z-50 border-b border-n-6 lg:bg-n-8/90 lg:backdrop-blur-sm ${
         openNavigation ? "bg-n-8" : "bg-n-8/90 backdrop-blur-sm"
       }`}
     >
@@ -42,10 +42,10 @@ const Header = () => {
 
         <nav
           className={`${
-            openNavigation ? "flex" : "hidden"
-          } fixed top-[5rem] left-0 right-0 bottom-0 bg-n-8 lg:static lg:flex lg:mx-auto lg:bg-transparent`}
+            openNavigation ? "block" : "hidden"
+          } absolute top-full left-0 right-0 border-t border-n-6 bg-n-8 lg:static lg:flex lg:mx-auto lg:bg-transparent lg:border-none`}
         >
-          <div className="relative z-2 flex flex-col items-center justify-center m-auto lg:flex-row">
+          <div className="relative z-2 flex flex-col items-center lg:flex-row">
             {navigation.map((item) => (
               <a
                 key={item.id}
@@ -53,7 +53,7 @@ const Header = () => {
                 onClick={handleClick}
                 className={`block relative font-code text-2xl uppercase text-n-1 transition-colors hover:text-color-1 ${
                   item.onlyMobile ? "lg:hidden" : ""
-                } px-6 py-6 md:py-8 lg:-mr-0.25 lg:text-xs lg:font-semibold ${
+                } px-6 py-6 md:py-8 lg:-mr-0.25 lg:text-xs lg:font-semibold lg:py-3 ${
                   item.url === pathname.hash
                     ? "z-2 lg:text-n-1"
                     : "lg:text-n-1/50"
@@ -66,6 +66,7 @@ const Header = () => {
 
           <HamburgerMenu />
         </nav>
+
         <Button
           className="ml-auto lg:hidden"
           px="px-3"
