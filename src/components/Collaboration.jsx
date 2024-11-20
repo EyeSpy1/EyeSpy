@@ -1,11 +1,32 @@
 import { eyespy_logo, check } from "../assets";
+import React, { useState } from "react"; 
 import { collabApps, collabContent, collabText } from "../constants";
 import Button from "./Button";
 import Section from "./Section";
 import Heading from "./Heading";
 import { LeftCurve, RightCurve } from "./design/Collaboration";
-
+import axios from "axios";
 const Collaboration = () => {
+  const [status, setStatus] = useState("");
+  const startDetection = async () => {
+    try {
+      const response = await axios.post("http://localhost:8501/start-detection");
+      setStatus("Started");
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error starting detection:", error);
+    }
+  };
+
+  const stopDetection = async () => {
+    try {
+      const response = await axios.post("http://localhost:8501/stop-detection");
+      setStatus("Stopped");
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error stopping detection:", error);
+    }
+  };
   return (
     <Section crosses id = "working">
       <div className="container lg:flex">
@@ -28,7 +49,7 @@ const Collaboration = () => {
             ))}
           </ul>
 
-          <Button>Try it now</Button>
+          <Button onClick={startDetection}>Try it now</Button>
         </div>
 
         <div className="lg:ml-auto xl:w-[38rem] mt-4">

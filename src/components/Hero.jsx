@@ -9,27 +9,10 @@ import Generating from "./Generating";
 import Notification from "./Notification";
 import Heading from "./Heading";
 import axios from "axios";
+import Benefits from "./Benefits";
 const Hero = () => {
-  const parallaxRef = useRef(null);
-  const startDetection = async () => {
-    try {
-      const response = await axios.post("http://localhost:5000/start-detection");
-      setStatus("Started");
-      console.log(response.data);
-    } catch (error) {
-      console.error("Error starting detection:", error);
-    }
-  };
 
-  const stopDetection = async () => {
-    try {
-      const response = await axios.post("http://localhost:5000/stop-detection");
-      setStatus("Stopped");
-      console.log(response.data);
-    } catch (error) {
-      console.error("Error stopping detection:", error);
-    }
-  };
+  const parallaxRef = useRef(null);
 
 
   return (
@@ -58,8 +41,8 @@ const Hero = () => {
           <p className="body-1 max-w-3xl mx-auto mb-6 text-n-2 lg:mb-8">
           Real-time drowsiness detection to help you stay focused and productive, whether you're studying, working, or driving
           </p>
-          <Button onClick={startDetection} white>
-            Get started
+          <Button href ="/#features" white>
+            Explore Now
           </Button>
         </div>
         <div className="relative max-w-[23rem] mx-auto md:max-w-5xl xl:mb-24">
