@@ -6,33 +6,48 @@ import Section from "./Section";
 import Heading from "./Heading";
 import { LeftCurve, RightCurve } from "./design/Collaboration";
 import axios from "axios";
+import "../App.css";  // Ensure the CSS file is imported
+
 const Collaboration = () => {
   const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);  // Added loading state to disable buttons while waiting
+
+  // Start detection
   const startDetection = async () => {
+    setLoading(true);  // Start loading state when the request starts
     try {
       const response = await axios.post("http://localhost:8501/start-detection");
       setStatus("Started");
-      console.log(response.data);
+      console.log("Detection started:", response.data);
     } catch (error) {
       console.error("Error starting detection:", error);
+      alert("There was an error starting the detection. Please try again.");
+    } finally {
+      setLoading(false);  // Stop loading once the request is completed (or failed)
     }
   };
 
+  // Stop detection
   const stopDetection = async () => {
+    setLoading(true);  // Set loading to true when the request starts
     try {
       const response = await axios.post("http://localhost:8501/stop-detection");
       setStatus("Stopped");
-      console.log(response.data);
+      console.log("Detection stopped:", response.data);
     } catch (error) {
       console.error("Error stopping detection:", error);
+      alert("There was an error stopping the detection. Please try again.");
+    } finally {
+      setLoading(false);  // Reset loading state after the request
     }
   };
+
   return (
-    <Section crosses id = "working">
+    <Section crosses id="working">
       <div className="container lg:flex">
         <div className="max-w-[25rem]">
           <h2 className="h2 mb-4 md:mb-8">
-          The Technology Powering Eyespy
+            The Technology Powering Eyespy
           </h2>
 
           <ul className="max-w-[22rem] mb-10 md:mb-14">
@@ -49,7 +64,17 @@ const Collaboration = () => {
             ))}
           </ul>
 
-          <Button onClick={startDetection}>Try it now</Button>
+          <Button onClick={startDetection} disabled={loading}>
+            {loading ? (
+              <>
+                <div className="spinner"></div> {/* Spinner div here */}
+                Starting Detection...
+              </>
+            ) : (
+              "Try it now"
+            )}
+          </Button>
+
         </div>
 
         <div className="lg:ml-auto xl:w-[38rem] mt-4">
@@ -75,14 +100,10 @@ const Collaboration = () => {
               {collabApps.map((app, index) => (
                 <li
                   key={app.id}
-                  className={`absolute top-0 left-1/2 h-1/2 -ml-[1.6rem] origin-bottom rotate-${
-                    index * 45
-                  }`}
+                  className={`absolute top-0 left-1/2 h-1/2 -ml-[1.6rem] origin-bottom rotate-${index * 45}`}
                 >
                   <div
-                    className={`relative -top-[1.6rem] flex w-[3.2rem] h-[3.2rem] bg-n-7 border border-n-1/15 rounded-xl -rotate-${
-                      index * 45
-                    }`}
+                    className={`relative -top-[1.6rem] flex w-[3.2rem] h-[3.2rem] bg-n-7 border border-n-1/15 rounded-xl -rotate-${index * 45}`}
                   >
                     <img
                       className="m-auto"
