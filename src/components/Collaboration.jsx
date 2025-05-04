@@ -46,9 +46,7 @@ const Collaboration = () => {
     <Section crosses id="working">
       <div className="container lg:flex">
         <div className="max-w-[25rem]">
-          <h2 className="h2 mb-4 md:mb-8">
-            The Technology Powering Eyespy
-          </h2>
+          <h2 className="h2 mb-4 md:mb-8">The Technology Powering Eyespy</h2>
 
           <ul className="max-w-[22rem] mb-10 md:mb-14">
             {collabContent.map((item) => (
@@ -64,8 +62,7 @@ const Collaboration = () => {
             ))}
           </ul>
 
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
+          <div className="flex gap-4">
             <Button onClick={startDetection} disabled={loading}>
               {loading ? (
                 <>
@@ -73,7 +70,7 @@ const Collaboration = () => {
                   Starting Detection...
                 </>
               ) : (
-                "Try it now"
+                "Start Detection"
               )}
             </Button>
 
@@ -81,13 +78,15 @@ const Collaboration = () => {
               {loading ? (
                 <>
                   <div className="spinner"></div>
-                  Stopping Detection...
+                  Stopping...
                 </>
               ) : (
                 "Stop Detection"
               )}
             </Button>
           </div>
+
+          {status && <p className="mt-4 text-green-600">Status: {status}</p>}
         </div>
 
         <div className="lg:ml-auto xl:w-[38rem] mt-4">
