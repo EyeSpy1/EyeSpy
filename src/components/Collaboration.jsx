@@ -12,18 +12,19 @@ const Collaboration = () => {
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
   const [showStreamlit, setShowStreamlit] = useState(false);
+  const [streamlitUrl, setStreamlitUrl] = useState(""); // Add a state for the Streamlit URL
 
   const startDetection = async () => {
     setLoading(true);
     try {
-      const response = await axios.post("https://drowsiness-app.onrender.com/start-detection");
+      const response = await axios.post("https://your-app.onrender.com/start-detection");
       setStatus("Started");
       setShowStreamlit(true); // Show iframe after detection starts
       console.log("Detection started:", response.data);
   
-      // Dynamically set the iframe URL based on the backend response
-      const streamlitUrl = response.data.url;
-      document.getElementById("streamlit-iframe").src = streamlitUrl;
+      // Dynamically set the Streamlit URL
+      const streamlitUrl = "https://your-app.onrender.com:8502";
+      setStreamlitUrl(streamlitUrl); // Update the iframe URL
     } catch (error) {
       console.error("Error starting detection:", error);
       alert("There was an error starting the detection. Please try again.");
@@ -31,7 +32,6 @@ const Collaboration = () => {
       setLoading(false);
     }
   };
-
   const stopDetection = async () => {
     setLoading(true);
     try {
@@ -140,21 +140,20 @@ const Collaboration = () => {
         </div>
       </div>
 
-      {/* Embed Streamlit app when started */}
-      {showStreamlit && (
-        <div className="mt-12">
-          <h3 className="text-xl font-semibold mb-4">Live Drowsiness Detection</h3>
-          <iframe
-  id="streamlit-iframe"
-  src=""
-  title="Streamlit Drowsiness App"
-  width="100%"
-  height="600"
-  frameBorder="0"
-  allow="camera *; microphone *"
-></iframe>
-        </div>
-      )}
+{/* Embed Streamlit app when started */}
+{showStreamlit && streamlitUrl && (
+  <div className="mt-12">
+    <h3 className="text-xl font-semibold mb-4">Live Drowsiness Detection</h3>
+    <iframe
+      src={streamlitUrl} // Use the dynamically set URL
+      title="Streamlit Drowsiness App"
+      width="100%"
+      height="600"
+      frameBorder="0"
+      allow="camera *; microphone *"
+    ></iframe>
+  </div>
+)}
     </Section>
   );
 };
