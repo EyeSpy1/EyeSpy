@@ -17,13 +17,13 @@ const Collaboration = () => {
   const startDetection = async () => {
     setLoading(true);
     try {
-      const response = await axios.post("https://your-app.onrender.com/start-detection");
+      const response = await axios.post("https://drowsiness-app.onrender.com/start-detection");
       setStatus("Started");
       setShowStreamlit(true); // Show iframe after detection starts
       console.log("Detection started:", response.data);
   
-      // Dynamically set the Streamlit URL
-      const streamlitUrl = "https://your-app.onrender.com:8502";
+      // Use the Streamlit URL returned by the backend
+      const streamlitUrl = response.data.url;
       setStreamlitUrl(streamlitUrl); // Update the iframe URL
     } catch (error) {
       console.error("Error starting detection:", error);
