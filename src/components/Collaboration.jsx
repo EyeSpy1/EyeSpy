@@ -1,5 +1,5 @@
 import { eyespy_logo, check } from "../assets";
-import React, { useState } from "react"; 
+import React, { useState } from "react";
 import { collabApps, collabContent, collabText } from "../constants";
 import Button from "./Button";
 import Section from "./Section";
@@ -10,35 +10,35 @@ import "../App.css";  // Ensure the CSS file is imported
 
 const Collaboration = () => {
   const [status, setStatus] = useState("");
-  const [loading, setLoading] = useState(false);  // Added loading state to disable buttons while waiting
+  const [loading, setLoading] = useState(false);
 
   // Start detection
   const startDetection = async () => {
-    setLoading(true);  // Start loading state when the request starts
+    setLoading(true);
     try {
-      const response = await axios.post("http://localhost:8501/start-detection");
+      const response = await axios.post("https://drowsiness-app.onrender.com/start-detection");
       setStatus("Started");
       console.log("Detection started:", response.data);
     } catch (error) {
       console.error("Error starting detection:", error);
       alert("There was an error starting the detection. Please try again.");
     } finally {
-      setLoading(false);  // Stop loading once the request is completed (or failed)
+      setLoading(false);
     }
   };
 
   // Stop detection
   const stopDetection = async () => {
-    setLoading(true);  // Set loading to true when the request starts
+    setLoading(true);
     try {
-      const response = await axios.post("http://localhost:8501/stop-detection");
+      const response = await axios.post("https://drowsiness-app.onrender.com/stop-detection");
       setStatus("Stopped");
       console.log("Detection stopped:", response.data);
     } catch (error) {
       console.error("Error stopping detection:", error);
       alert("There was an error stopping the detection. Please try again.");
     } finally {
-      setLoading(false);  // Reset loading state after the request
+      setLoading(false);
     }
   };
 
@@ -64,17 +64,30 @@ const Collaboration = () => {
             ))}
           </ul>
 
-          <Button onClick={startDetection} disabled={loading}>
-            {loading ? (
-              <>
-                <div className="spinner"></div> {/* Spinner div here */}
-                Starting Detection...
-              </>
-            ) : (
-              "Try it now"
-            )}
-          </Button>
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
+            <Button onClick={startDetection} disabled={loading}>
+              {loading ? (
+                <>
+                  <div className="spinner"></div>
+                  Starting Detection...
+                </>
+              ) : (
+                "Try it now"
+              )}
+            </Button>
 
+            <Button onClick={stopDetection} disabled={loading}>
+              {loading ? (
+                <>
+                  <div className="spinner"></div>
+                  Stopping Detection...
+                </>
+              ) : (
+                "Stop Detection"
+              )}
+            </Button>
+          </div>
         </div>
 
         <div className="lg:ml-auto xl:w-[38rem] mt-4">
