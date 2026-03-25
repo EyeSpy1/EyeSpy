@@ -17,7 +17,7 @@ const Collaboration = () => {
   const startDetection = async () => {
     setLoading(true);
     try {
-      const response = await axios.post("https://drowsiness-app.onrender.com/start-detection");
+      const response = await axios.post("https://eyespy-backend.onrender.com/start-detection");
       setStatus("Started");
       setShowStreamlit(true); // Show iframe after detection starts
       console.log("Detection started:", response.data);
@@ -35,7 +35,7 @@ const Collaboration = () => {
   const stopDetection = async () => {
     setLoading(true);
     try {
-      const response = await axios.post("https://drowsiness-app.onrender.com/stop-detection");
+      const response = await axios.post("https://eyespy-backend.onrender.com/stop-detection");
       setStatus("Stopped");
       setShowStreamlit(false);  // Hide iframe when stopped
       console.log("Detection stopped:", response.data);
